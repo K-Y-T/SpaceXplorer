@@ -67,16 +67,16 @@ int asteroidsToRow() { // generates a random number to decide asteroids in a row
     int dice = rand() % 101;  // random number between 0 and 100
 
     if (maxAsteroidsPR == 3) {  // Easy
-        if (dice <= 10) return 1;
-        else if (dice <= 30) return 2;
-        else if (dice <= 60) return 3;
+        if (dice <= 20) return 1;
+        else if (dice <= 60) return 2;
+        else if (dice <= 100) return 3;
         else return 0;
     }
     else if (maxAsteroidsPR == 4) {  // Medium
-        if (dice <= 10) return 1;
-        else if (dice <= 30) return 2;
-        else if (dice <= 60) return 3;
-        else if (dice <= 85) return 4;
+        if (dice <= 15) return 1;
+        else if (dice <= 35) return 2;
+        else if (dice <= 75) return 3;
+        else if (dice <= 100) return 4;
         else return 0;
     }
     else if (maxAsteroidsPR == 5) {  // Hard

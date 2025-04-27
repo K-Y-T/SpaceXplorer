@@ -16,6 +16,16 @@ void selectDifficulty() { // difficulty selection
     }
 }
 
+void clearBuffer() {
+    while (getchar() != '\n');  // Clear the input buffer
+}
+
+void waitForInput() { // dummy function to test world module - moving forward in turns
+    printf("Press any key to continue to the next turn...\n");
+    getchar();  // get character from user
+    clearBuffer();  // clear newlines
+}
+
 // Main function
 int main() {
     srand(time(NULL));  // seed for rand
@@ -52,8 +62,7 @@ int main() {
 
         // This is where all other game mechanics goes
 
-        printf("Press Enter to continue to the next turn...\n");
-        getchar();  // Wait for user input to continue
+        waitForInput();
     }
 
     return 0;

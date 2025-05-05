@@ -76,7 +76,7 @@ void toggleShield() {
 
 void checkShields() {
     // Check if the shield is active and deactivate it after 3 turns
-    if (spaceship.shield == 1 && turnCounter >= shieldTurnActivated + 2) {
+    if (spaceship.shield == 1 && turnCounter >= shieldTurnActivated + 3) {
         spaceship.shield = 0;  // Turn off the shield
         spaceship.type = SPACESHIP;  // Change spaceship symbol back to normal (A)
         printf("Shield deactivated.\n");

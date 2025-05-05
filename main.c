@@ -4,6 +4,7 @@
 #include "gameobjects.h"
 #include "spaceship.h"
 #include "world.h"
+#include "collision.h"
 
 int diff;  // global variable to hold the difficulty level
 int turnCounter = 0;
@@ -32,14 +33,9 @@ int main() {
     placeObject(&spaceship, spaceship.x, spaceship.y);
 
     generateAsteroids(); // creating 8 lines of asteroids as opening to game
-    moveAsteroids(); // 1
-    moveAsteroids(); // 2
-    moveAsteroids(); // 3
-    moveAsteroids(); // 4
-    moveAsteroids(); // 5
-    moveAsteroids(); // 6
-    moveAsteroids(); // 7
-    moveAsteroids(); // 8
+    for (int i = 0; i < 8; i++) {
+        moveAsteroids();
+    }
 
     while (spaceship.health > 0) { // dummy infinite loop to test the world and spaceship integration
         printf("\nTurn: %d      Fuel: %d, Health: %d\n", turnCounter, spaceship.fuel, spaceship.health);
@@ -51,11 +47,11 @@ int main() {
         scanf(" %c", &input);
 
         if (input == 'w' || input == 'a' || input == 's' || input == 'd') {
+            collisionNOMotion(input);
             // Move the spaceship
             moveSpaceship(input);
             placeObject(&spaceship, spaceship.x, spaceship.y);  // Update position on the grid
             turnCounter++;  // Increment the turn counter only after movement
-            moveAsteroids();
         } else if (input == 'p') {
             // Toggle the shield
             toggleShield();

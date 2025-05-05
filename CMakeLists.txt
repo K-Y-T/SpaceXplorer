@@ -9,4 +9,7 @@ add_executable(SpaceXplorer main.c
         world.h
         gameobjects.c
         spaceship.c
-        spaceship.h)
+        spaceship.h
+        collision.c
+        collision.h
+)

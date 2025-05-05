@@ -132,9 +132,8 @@ void harvestAsteroid() {
 }
 
 // reducing health at command
-void reduceHealth() {
+void reduceHealth(int value) {
     if (spaceship.health > 0) {
-        spaceship.health--;
-        printf("Health reduced!");
+        spaceship.health = spaceship.health - value;
     }
 }

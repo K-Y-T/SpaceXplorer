@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "gameobjects.h"
+#include "spaceship.h"
 #include "world.h"
 
 int diff;  // global variable to hold the difficulty level
+int turnCounter = 0;
 
 void selectDifficulty() { // difficulty selection
     printf("Select difficulty (1: Easy, 2: Medium, 3: Hard): ");
@@ -14,16 +16,6 @@ void selectDifficulty() { // difficulty selection
         printf("Invalid input, setting difficulty to Easy by default.\n");
         diff = 1; // exception clause for invalid input
     }
-}
-
-void clearBuffer() {
-    while (getchar() != '\n');  // Clear the input buffer
-}
-
-void waitForInput() { // dummy function to test world module - moving forward in turns
-    printf("Press any key to continue to the next turn...\n");
-    getchar();  // get character from user
-    clearBuffer();  // clear newlines
 }
 
 // Main function
@@ -36,33 +28,44 @@ int main() {
 
     createGrid(); // creating the grid and emptying contents
 
+    initSpaceship();
+    placeObject(&spaceship, spaceship.x, spaceship.y);
+
     generateAsteroids(); // creating 8 lines of asteroids as opening to game
     moveAsteroids(); // 1
-    generateAsteroids();
     moveAsteroids(); // 2
-    generateAsteroids();
     moveAsteroids(); // 3
-    generateAsteroids();
     moveAsteroids(); // 4
-    generateAsteroids();
     moveAsteroids(); // 5
-    generateAsteroids();
     moveAsteroids(); // 6
-    generateAsteroids();
     moveAsteroids(); // 7
-    generateAsteroids();
     moveAsteroids(); // 8
 
-    while (1) { // dummy infinite loop to test the world function
-        generateAsteroids();
+    while (spaceship.health > 0) { // dummy infinite loop to test the world and spaceship integration
+        printf("\nTurn: %d      Fuel: %d, Health: %d\n", turnCounter, spaceship.fuel, spaceship.health);
 
         printGrid();
 
-        moveAsteroids();
-
         // This is where all other game mechanics goes
+        char input;
+        scanf(" %c", &input);
 
-        waitForInput();
+        if (input == 'w' || input == 'a' || input == 's' || input == 'd') {
+            // Move the spaceship
+            moveSpaceship(input);
+            placeObject(&spaceship, spaceship.x, spaceship.y);  // Update position on the grid
+            turnCounter++;  // Increment the turn counter only after movement
+            moveAsteroids();
+        } else if (input == 'p') {
+            // Toggle the shield
+            toggleShield();
+        } else if (input == 'h') {
+            // Harvest an asteroid
+            harvestAsteroid();
+        } else {
+            printf("Invalid input, try again.\n");
+        }
+        checkShields();
     }
 
     return 0;

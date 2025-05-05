@@ -7,4 +7,6 @@ add_executable(SpaceXplorer main.c
         world.c
         gameobjects.h
         world.h
-        gameobjects.c)
+        gameobjects.c
+        spaceship.c
+        spaceship.h)

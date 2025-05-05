@@ -9,11 +9,16 @@
 
 // icons for objects
 #define ASTEROID '@'
+#define SPACESHIP 'A'
+#define SHIELD 'O'
 
 // GameObjects structure to represent any object in game
 typedef struct {
     char type;   // Type of the object
     int x, y;    // Position in grid
+    int fuel;    // Spaceship fuel
+    int shield;  // Shield status (1 = active, 0 = inactive)
+    int health;  // Spaceship health
 } GameObjects;
 
 // Function prototypes

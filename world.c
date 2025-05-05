@@ -40,14 +40,20 @@ void generateAsteroids() { // generates asteroids on the topmost row of grid
 }
 
 void moveAsteroids() { // moves asteroids down the grid, works from the down up
+    for (int j = 0; j < GRID_SIZE; j++) {
+        grid[GRID_SIZE - 1][j] = NULL;  // Remove any existing asteroids in the bottom row
+    }
+
     for (int i = GRID_SIZE - 1; i > 0; i--) {
         for (int j = 0; j < GRID_SIZE; j++) {
             if (grid[i-1][j] != NULL && grid[i-1][j]->type == ASTEROID) { // if cell not empty and is asteroid
                 grid[i][j] = grid[i-1][j];
                 grid[i-1][j] = NULL;  // empty the old position
+
+                grid[i][j]->y = i;
             }
         }
-    }
+    } generateAsteroids();
 }
 
 void printGrid() { // prints the grid to screen

@@ -12,4 +12,6 @@ add_executable(SpaceXplorer main.c
         spaceship.h
         collision.c
         collision.h
+        filehandling.c
+        filehandling.h
 )

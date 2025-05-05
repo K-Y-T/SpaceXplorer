@@ -79,6 +79,12 @@ build CMakeFiles/SpaceXplorer.dir/collision.c.obj: C_COMPILER__SpaceXplorer_unsc
   OBJECT_DIR = CMakeFiles\SpaceXplorer.dir
   OBJECT_FILE_DIR = CMakeFiles\SpaceXplorer.dir
 
+build CMakeFiles/SpaceXplorer.dir/filehandling.c.obj: C_COMPILER__SpaceXplorer_unscanned_Debug C$:/Users/USER/SpaceXplorer/filehandling.c || cmake_object_order_depends_target_SpaceXplorer
+  DEP_FILE = CMakeFiles\SpaceXplorer.dir\filehandling.c.obj.d
+  FLAGS = -g -std=gnu99 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\SpaceXplorer.dir
+  OBJECT_FILE_DIR = CMakeFiles\SpaceXplorer.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SpaceXplorer
@@ -87,7 +93,7 @@ build CMakeFiles/SpaceXplorer.dir/collision.c.obj: C_COMPILER__SpaceXplorer_unsc
 #############################################
 # Link the executable SpaceXplorer.exe
 
-build SpaceXplorer.exe: C_EXECUTABLE_LINKER__SpaceXplorer_Debug CMakeFiles/SpaceXplorer.dir/main.c.obj CMakeFiles/SpaceXplorer.dir/world.c.obj CMakeFiles/SpaceXplorer.dir/gameobjects.c.obj CMakeFiles/SpaceXplorer.dir/spaceship.c.obj CMakeFiles/SpaceXplorer.dir/collision.c.obj
+build SpaceXplorer.exe: C_EXECUTABLE_LINKER__SpaceXplorer_Debug CMakeFiles/SpaceXplorer.dir/main.c.obj CMakeFiles/SpaceXplorer.dir/world.c.obj CMakeFiles/SpaceXplorer.dir/gameobjects.c.obj CMakeFiles/SpaceXplorer.dir/spaceship.c.obj CMakeFiles/SpaceXplorer.dir/collision.c.obj CMakeFiles/SpaceXplorer.dir/filehandling.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\SpaceXplorer.dir

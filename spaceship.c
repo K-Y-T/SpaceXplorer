@@ -9,6 +9,7 @@
 
 extern int shieldcool = 0;
 extern int turnCounter;  // Turns passed
+int harvestCooldown = 0;
 
 GameObjects spaceship;
 
@@ -75,7 +76,7 @@ void toggleShield() {
 
 void checkShields() {
     // Check if the shield is active and deactivate it after 3 turns
-    if (spaceship.shield == 1 && turnCounter >= shieldTurnActivated + 3) {
+    if (spaceship.shield == 1 && turnCounter >= shieldTurnActivated + 2) {
         spaceship.shield = 0;  // Turn off the shield
         spaceship.type = SPACESHIP;  // Change spaceship symbol back to normal (A)
         printf("Shield deactivated.\n");
@@ -99,10 +100,7 @@ void checkShields() {
 
 // harvesting asteroids and adding fuel
 void harvestAsteroid() {
-    static int harvestCooldown = 0;
-
     if (harvestCooldown > 0) {
-        harvestCooldown--;  // Cooldown counts down each turn
         printf("Harvesting is on cooldown. %d turns remaining.\n", harvestCooldown);
         return;
     }
@@ -114,9 +112,17 @@ void harvestAsteroid() {
             if (i >= 0 && i < GRID_SIZE && j >= 0 && j < GRID_SIZE) {
                 // If there's an asteroid in an adjacent cell
                 if (grid[i][j] != NULL && grid[i][j]->type == ASTEROID) {
-                    // harvest this asteroid
-                    spaceship.fuel += 10;  // add fuel
-                    printf("Asteroid harvested!\n");
+                    // Check if the spaceship's fuel is less than 50
+                    if (spaceship.fuel < 50) {
+                        // If the fuel is already at 40 or more, cap it at 50
+                        if (spaceship.fuel >= 40) {
+                            spaceship.fuel = 50;
+                            printf("Fuel harvesting limit reached. Fuel is now full.\n");
+                        } else {
+                            spaceship.fuel += 10;  // Add fuel normally
+                            printf("Asteroid harvested! Fuel: %d\n", spaceship.fuel);
+                        }
+                    }
 
                     grid[i][j] = NULL; // Remove the asteroid from the grid
                     placeObject(&spaceship, spaceship.x, spaceship.y);

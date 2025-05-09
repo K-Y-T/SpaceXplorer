@@ -1,13 +1,9 @@
-//
-// Created by USER on 30/04/2025.
-//
-// spaceship.c
 #include <stdio.h>
 #include "gameobjects.h"
 #include "world.h"
 #include "spaceship.h"
 
-extern int shieldcool = 0;
+int shieldcool = 0;
 extern int turnCounter;  // Turns passed
 int harvestCooldown = 0;
 
@@ -74,22 +70,22 @@ void toggleShield() {
     } checkShields();
 }
 
+// handles shield deactivation and cooldowns
 void checkShields() {
-    // Check if the shield is active and deactivate it after 3 turns
     if (spaceship.shield == 1 && turnCounter >= shieldTurnActivated + 3) {
-        spaceship.shield = 0;  // Turn off the shield
-        spaceship.type = SPACESHIP;  // Change spaceship symbol back to normal (A)
+        spaceship.shield = 0;  // shield off
+        spaceship.type = SPACESHIP;  // spaceship symbol back to normal
         printf("Shield deactivated.\n");
 
         // After deactivation, update the spaceship's position on the grid
-        placeObject(&spaceship, spaceship.x, spaceship.y);  // Ensure symbol is updated on the grid
-        shieldTurnActivated = -1;  // Reset the shield turn counter for the next activation
+        placeObject(&spaceship, spaceship.x, spaceship.y);
+        shieldTurnActivated = -1;  // reset the shield turn counter
 
         // Set cooldown to 3 turns before the shield can be activated again
-        shieldcool = 3;
+        shieldcool = 4;
     }
 
-    // Cooldown management (no shield activation for 3 turns after deactivation)
+    // Cooldown management
     if (shieldcool > 0) {
         shieldcool--;  // Decrease cooldown each turn
         if (shieldcool > 0) {

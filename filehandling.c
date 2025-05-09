@@ -1,6 +1,3 @@
-//
-// Created by USER on 05/05/2025.
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,34 +5,35 @@
 
 #define FILENAME "highscores.txt"
 
-// Function to save the game result to the file
+// saving the game result to a text file
 void saveGameResult(float elapsed_time, int final_fuel, int final_health, int asteroids_harvested) {
-    FILE *file = fopen(FILENAME, "a");  // Open file in append mode
+    FILE *file = fopen(FILENAME, "a");  // open the file in append mode
     if (file == NULL) {
         printf("Error opening file to save result.\n");
         return;
     }
 
-    // Calculate the calculated value based on the rules
+    // Score calculation
     float calculated_value = 0;
-    calculated_value += 1.0f / (elapsed_time + 1);  // Least time, the better (inversely)
+    // Added
+    calculated_value += 1.0f / (elapsed_time + 1);  // Least time, the better
     calculated_value += final_fuel / 50.0f;  // Most fuel, the better
     calculated_value += final_health / 3.0f;  // Most health, the better
+    // Deducted
     calculated_value -= asteroids_harvested / 10.0f;  // Least asteroids, the better
 
-    // Get the current date in YYYY-MM-DD format
     time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
+    struct tm tm = *localtime(&t); // current date in YYYY-MM-DD format
     char date[11];
     sprintf(date, "%d-%02d-%02d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
 
-    // Write the result to the file
+    // write the result to the file
     fprintf(file, "%s %.2f %d %d %d %.2f\n", date, elapsed_time, final_fuel, final_health, asteroids_harvested, calculated_value);
 
-    fclose(file);  // Close the file
+    fclose(file);  // file closing
 }
 
-// Function to display high scores (top 5)
+// displaying the top 5 high scores
 void displayHighScores() {
     FILE *file = fopen(FILENAME, "r");  // Open file in read mode
     if (file == NULL) {
@@ -44,7 +42,7 @@ void displayHighScores() {
     }
 
     // Array to store all results from the file
-    GameResult results[100];  // Allocate memory for a larger number of records (100 here, adjust as needed)
+    GameResult results[100];  // allocated memory for 100 records
     int count = 0;
 
     // Read all game results from the file
@@ -54,13 +52,12 @@ void displayHighScores() {
         count++;
     }
 
-    fclose(file);  // Close the file
+    fclose(file);
 
-    // Sort the results by calculated value (descending order)
+    // Sort the results by score
     for (int i = 0; i < count - 1; i++) {
         for (int j = i + 1; j < count; j++) {
             if (results[i].calculated_value < results[j].calculated_value) {
-                // Swap the elements
                 GameResult temp = results[i];
                 results[i] = results[j];
                 results[j] = temp;
@@ -77,7 +74,7 @@ void displayHighScores() {
     }
 }
 
-// Function to print the game rules and controls
+// printing the game rules and controls
 void printRules() {
     printf("\nGame Rules:\n");
     printf("The objective of the game is to survive while avoiding asteroids.\n");
@@ -86,10 +83,10 @@ void printRules() {
     printf("   - 'a' to move left\n");
     printf("   - 's' to move down\n");
     printf("   - 'd' to move right\n");
-    printf("3. Press 'p' to activate a shield (consumes 15 fuel, turns on for two turns, goes into cooldown for three turns after deactivating).\n");
-    printf("4. Press 'h' to harvest asteroids and gain fuel (adds 10 fuel, you can only harvest once per 5 turns).\n");
-    printf("5. Your fuel decreases over time. Use it wisely!\n");
-    printf("6. If you collide with an asteroid, you lose health. If health reaches zero, you lose the game.\n");
-    printf("7. To win, survive for 60 turns!\n");
+    printf("Press 'p' to activate a shield (consumes 15 fuel, turns on for two turns, goes into cooldown for three turns after deactivating).\n");
+    printf("Press 'h' to harvest asteroids and gain fuel (adds 10 fuel, you can only harvest once per 5 turns).\n");
+    printf("Your fuel decreases over time. Use it wisely!\n");
+    printf("If you collide with an asteroid, you lose health. If health reaches zero, you lose the game.\n");
+    printf("To win, survive for 60 turns!\n");
 }
 

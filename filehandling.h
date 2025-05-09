@@ -1,7 +1,3 @@
-//
-// Created by USER on 05/05/2025.
-//
-
 #ifndef FILEHANDLING_H
 #define FILEHANDLING_H
 
@@ -10,11 +6,11 @@
 // Game result structure
 typedef struct {
     char date[11];  // Format: YYYY-MM-DD
-    float elapsed_time;  // Time elapsed to win (in seconds)
-    int final_fuel;  // Final fuel (capped at 50)
-    int final_health;  // Final health (capped at 3)
+    float elapsed_time;  // victory elapsed time in seconds
+    int final_fuel;  // Final fuel
+    int final_health;  // Final health
     int asteroids_harvested;  // Number of asteroids harvested
-    float calculated_value;  // Final score based on the calculated formula
+    float calculated_value;  // Score
 } GameResult;
 
 // Function prototypes

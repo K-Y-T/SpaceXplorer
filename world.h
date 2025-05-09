@@ -1,7 +1,3 @@
-//
-// Created by y2-kalansooriy on 26/04/2025.
-//
-
 #ifndef WORLD_H
 #define WORLD_H
 

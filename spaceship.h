@@ -1,7 +1,3 @@
-//
-// Created by USER on 30/04/2025.
-//
-
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
@@ -16,6 +12,6 @@ void moveSpaceship(char input);  // Move the spaceship based on user input ('w',
 void toggleShield();            // Activate/deactivate shield and handle fuel
 void checkShields();
 void harvestAsteroid();         // Harvest an asteroid and add fuel
-void reduceHealth();            // Reduce the spaceship's health
+void reduceHealth(int value);            // Reduce the spaceship's health
 
 #endif //SPACESHIP_H
